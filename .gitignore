@@ -1,0 +1,20 @@
+# Binaries
+wifibear
+wifibear-*
+*.exe
+*.out
+
+# Runtime files
+.wifibear-session.json
+wifibear-results.json
+handshakes/
+
+# Dot directories (except .github)
+.*/
+!.github/
+
+# macOS
+.DS_Store
+
+# Build artifacts
+dist/
