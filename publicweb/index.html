@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WifiBear — Fast WiFi Security Auditing</title>
+  <meta name="description" content="Fast, single-binary WiFi security auditing tool. Capture WPA handshakes, crack passwords, and audit wireless networks from one 6MB executable.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <img src="logo.png" alt="WifiBear" class="hero-logo">
+    <h1>Fast, single-binary WiFi security auditing</h1>
+    <p class="tagline">Capture WPA handshakes, inject deauth frames, and crack passwords &mdash; all from one 6&nbsp;MB executable with zero third-party dependencies.</p>
+    <div class="cta-group">
+      <a href="https://github.com/jimmytoenners/wifibear/releases/latest" class="btn">Download Binary</a>
+      <a href="https://github.com/jimmytoenners/wifibear" class="btn btn-outline">View Source</a>
+    </div>
+  </section>
+
+  <!-- ── Features ── -->
+  <section id="features">
+    <div class="container">
+      <div class="section-title">// Features</div>
+      <p class="section-subtitle">Everything runs natively in Go. No Python, no aircrack-ng, no pip install.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">[&gt;] scan</span>
+          <h3>Passive 802.11 Scanning</h3>
+          <p>Parses raw beacons, probes, and data frames via gopacket. Discovers ESSIDs, encryption, WPS, clients, and signal strength in real time.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">[&gt;] capture</span>
+          <h3>WPA Handshake Capture</h3>
+          <p>Native pcap writer with live EAPOL tracking. Monitors 4-way handshake state per client and fires the moment M1+M2 are captured.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">[&gt;] inject</span>
+          <h3>Deauth Injection</h3>
+          <p>Constructs and transmits raw deauthentication frames via gopacket layer serialization and pcap_sendpacket. No aireplay-ng needed.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">[&gt;] crack</span>
+          <h3>Parallel Dictionary Cracker</h3>
+          <p>Native PBKDF2-SHA1 with full PMK&rarr;PTK&rarr;MIC verification. Distributes work across all CPU cores via goroutines. ~200-400 keys/sec per core.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">[&gt;] tui</span>
+          <h3>Interactive TUI</h3>
+          <p>Full-screen terminal interface built with Bubble Tea. Live-updating scan table, attack progress view, results browser, and vim-style navigation.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">[&gt;] zero-dep</span>
+          <h3>Zero Dependencies</h3>
+          <p>Core functionality requires only iw, ip, and libpcap &mdash; standard on every Linux distro. Single static binary, no runtime interpreter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TUI Preview ── -->
+  <section id="preview" class="tui-preview">
+    <div class="container">
+      <div class="section-title">// Terminal UI</div>
+      <p class="section-subtitle">What you see when you run wifibear.</p>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span>wifibear &mdash; scan view</span>
+        </div>
+<pre>
+<span class="tui-line-dim">┌─ WifiBear                                    wlan0 │ Ch: 6 │ Targets: 5 │ 45s ─┐</span>
+<span class="tui-line-dim">│                                                                                  │</span>
+<span class="tui-line-dim">│</span>  #    ESSID                  BSSID               CH  ENC    PWR  SIG  WPS  CLI   <span class="tui-line-dim">│</span>
+<span class="tui-line-dim">│</span>  ─    ─────                  ─────               ──  ───    ───  ───  ───  ───   <span class="tui-line-dim">│</span>
+<span class="tui-line-dim">│</span>  1    HomeNetwork            AA:BB:CC:DD:EE:01    6  <span class="tui-line-green">WPA2</span>   -45  ████ <span class="tui-line-green">Yes</span>  3     <span class="tui-line-dim">│</span>
+<span class="tui-line-dim">│</span>  2    CoffeeShop_5G          AA:BB:CC:DD:EE:02   36  <span class="tui-line-green">WPA2</span>   -52  ███░ No   1     <span class="tui-line-dim">│</span>
+<span class="tui-line-dim">│</span>  3    OldRouter              AA:BB:CC:DD:EE:03   11  <span class="tui-line-red">WEP</span>    -61  ██░░ No   0     <span class="tui-line-dim">│</span>
+<span class="tui-line-dim">│</span>  4    &lt;hidden&gt;               AA:BB:CC:DD:EE:04    1  <span class="tui-line-green">WPA2</span>   -70  █░░░ <span class="tui-line-green">Yes</span>  2     <span class="tui-line-dim">│</span>
+<span class="tui-line-dim">│</span>  5    OpenWiFi               AA:BB:CC:DD:EE:05    6  <span class="tui-line-dim">Open</span>   -73  █░░░ No   5     <span class="tui-line-dim">│</span>
+<span class="tui-line-dim">│                                                                                  │</span>
+<span class="tui-line-dim">├──────────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="tui-line-dim">│</span>  <span class="tui-line-cyan">[Enter]</span> Attack  <span class="tui-line-cyan">[a]</span> Attack all  <span class="tui-line-cyan">[r]</span> Results  <span class="tui-line-cyan">[?]</span> Help  <span class="tui-line-cyan">[q]</span> Quit                <span class="tui-line-dim">│</span>
+<span class="tui-line-dim">└──────────────────────────────────────────────────────────────────────────────────┘</span>
+</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Install ── -->
+  <section id="install">
+    <div class="container">
+      <div class="section-title">// Install</div>
+      <p class="section-subtitle">Download the binary and run. That's it.</p>
+
+      <div class="terminal" style="margin-bottom: 24px;">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span>download &amp; run</span>
+        </div>
+<pre>
+<span class="tui-line-dim"># Download the latest release</span>
+<span class="tui-line-green">$</span> curl -LO https://github.com/jimmytoenners/wifibear/releases/latest/download/wifibear-linux-amd64
+
+<span class="tui-line-dim"># Make it executable</span>
+<span class="tui-line-green">$</span> chmod +x wifibear-linux-amd64
+
+<span class="tui-line-dim"># Run it</span>
+<span class="tui-line-green">$</span> sudo ./wifibear-linux-amd64
+</pre>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span>build from source</span>
+        </div>
+<pre>
+<span class="tui-line-green">$</span> git clone https://github.com/jimmytoenners/wifibear.git
+<span class="tui-line-green">$</span> cd wifibear
+<span class="tui-line-green">$</span> make build
+<span class="tui-line-green">$</span> sudo ./wifibear
+</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Attack Chain ── -->
+  <section id="attacks">
+    <div class="container">
+      <div class="section-title">// Attack Chain</div>
+      <p class="section-subtitle">Select a WPA/WPA2 target and WifiBear runs the optimal attack sequence.</p>
+
+      <div class="attack-chain">
+        <div class="chain-step">
+          <div class="chain-number">1</div>
+          <div class="chain-content">
+            <h3>PMKID Capture</h3>
+            <p>Fast, clientless attack. Captures the PMKID from the AP's first EAPOL frame. 30s timeout, skipped if hcxdumptool unavailable.</p>
+            <span class="chain-tag optional">optional &mdash; hcxdumptool</span>
+          </div>
+        </div>
+
+        <div class="chain-step">
+          <div class="chain-number">2</div>
+          <div class="chain-content">
+            <h3>WPA 4-Way Handshake</h3>
+            <p>Opens pcap capture on the target channel. Injects deauth frames every 15s to force client reconnections. Monitors EAPOL state in real time &mdash; stops the instant a complete handshake is captured.</p>
+            <span class="chain-tag native">native &mdash; zero dependencies</span>
+          </div>
+        </div>
+
+        <div class="chain-step">
+          <div class="chain-number">3</div>
+          <div class="chain-content">
+            <h3>Dictionary Crack</h3>
+            <p>PBKDF2-SHA1 with 4096 iterations per passphrase. Full PMK &rarr; PTK &rarr; MIC verification pipeline parallelized across all CPU cores.</p>
+            <span class="chain-tag native">native &mdash; zero dependencies</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CLI Reference ── -->
+  <section id="cli">
+    <div class="container">
+      <div class="section-title">// CLI Reference</div>
+      <p class="section-subtitle">Key flags and options.</p>
+
+      <table class="cli-table">
+        <thead>
+          <tr>
+            <th>Flag</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>-i, --interface</code></td>
+            <td>auto</td>
+            <td>Wireless interface to use</td>
+          </tr>
+          <tr>
+            <td><code>-w, --wordlist</code></td>
+            <td>rockyou.txt</td>
+            <td>Path to wordlist for cracking</td>
+          </tr>
+          <tr>
+            <td><code>--pillage</code></td>
+            <td>off</td>
+            <td>Attack all targets automatically</td>
+          </tr>
+          <tr>
+            <td><code>--bssid</code></td>
+            <td>&mdash;</td>
+            <td>Target a specific access point</td>
+          </tr>
+          <tr>
+            <td><code>--essid</code></td>
+            <td>&mdash;</td>
+            <td>Target a specific network name</td>
+          </tr>
+          <tr>
+            <td><code>--no-pmkid</code></td>
+            <td>off</td>
+            <td>Skip PMKID, go straight to handshake</td>
+          </tr>
+          <tr>
+            <td><code>--wpa-only</code></td>
+            <td>off</td>
+            <td>Skip WPS and WEP attacks</td>
+          </tr>
+          <tr>
+            <td><code>--scan-timeout</code></td>
+            <td>30s</td>
+            <td>Scan duration before target selection</td>
+          </tr>
+          <tr>
+            <td><code>--hs-timeout</code></td>
+            <td>8m20s</td>
+            <td>Handshake capture timeout</td>
+          </tr>
+          <tr>
+            <td><code>--deauth-interval</code></td>
+            <td>15s</td>
+            <td>Time between deauth rounds</td>
+          </tr>
+          <tr>
+            <td><code>--mac-randomize</code></td>
+            <td>on</td>
+            <td>Randomize MAC address on start</td>
+          </tr>
+          <tr>
+            <td><code>-v, --verbose</code></td>
+            <td>1</td>
+            <td>Verbosity level (0-3)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://github.com/jimmytoenners/wifibear">GitHub</a>
+        <a href="https://github.com/jimmytoenners/wifibear/releases">Releases</a>
+        <a href="https://github.com/jimmytoenners/wifibear/blob/main/MANUAL.md">Manual</a>
+        <a href="https://github.com/jimmytoenners/wifibear/blob/main/LICENSE">License</a>
+      </div>
+      <p>Copyright 2025 Jimmy T&oslash;nners &mdash; Apache License 2.0</p>
+      <p>For authorized security testing and educational purposes only.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

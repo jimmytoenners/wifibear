@@ -5,10 +5,10 @@ Fast, single-binary WiFi security auditing tool written in Go.
 WifiBear scans for wireless networks, captures WPA handshakes, and cracks passwords — all from one 6 MB executable with **zero third-party tool dependencies** for core functionality. No Python, no aircrack-ng, no pip install.
 
 ```
- __      __ _  __  _  _
- \ \    / /(_)/ _|(_)| |__   ___  __ _  _ _
-  \ \/\/ / | |  _|| || '_ \ / -_)/ _' || '_|
-   \_/\_/  |_||_|  |_||_.__/ \___|\__,_||_|
+__      ___  __ _ ___
+\ \    / (_)/ _(_) _ ) ___ __ _ _ _
+ \ \/\/ /| |  _| | _ \/ -_) _` | '_|
+  \_/\_/ |_|_| |_|___/\___\__,_|_|
 ```
 
 ## Features
