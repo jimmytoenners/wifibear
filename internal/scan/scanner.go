@@ -14,10 +14,10 @@ import (
 
 // Scanner performs passive 802.11 scanning using gopacket.
 type Scanner struct {
-	iface    string
-	handle   *pcap.Handle
-	db       *TargetDB
-	verbose  int
+	iface   string
+	handle  *pcap.Handle
+	db      *TargetDB
+	verbose int
 }
 
 // NewScanner creates a new passive WiFi scanner.

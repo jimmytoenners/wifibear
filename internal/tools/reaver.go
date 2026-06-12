@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	reaverPINRe = regexp.MustCompile(`WPS PIN:\s*'?(\d+)'?`)
-	reaverPSKRe = regexp.MustCompile(`WPA PSK:\s*'(.+?)'`)
+	reaverPINRe      = regexp.MustCompile(`WPS PIN:\s*'?(\d+)'?`)
+	reaverPSKRe      = regexp.MustCompile(`WPA PSK:\s*'(.+?)'`)
 	reaverProgressRe = regexp.MustCompile(`(\d+\.\d+)% complete`)
 )
 

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: ['1.21', '1.22', '1.23']
+        go-version: ['1.25', '1.26']
     steps:
       - uses: actions/checkout@v4
 
@@ -22,6 +22,15 @@ jobs:
 
       - name: Install libpcap
         run: sudo apt-get update && sudo apt-get install -y libpcap-dev
+
+      - name: Check formatting
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            echo "These files are not gofmt-formatted:"
+            echo "$unformatted"
+            exit 1
+          fi
 
       - name: Build
         run: make build

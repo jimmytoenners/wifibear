@@ -6,11 +6,11 @@ import (
 )
 
 const (
-	EAPOLKeyTypeRC4  = 1
-	EAPOLKeyTypeAES  = 2
-	EAPOLVersion1    = 1
-	EAPOLVersion2    = 2
-	EAPOLTypeKey     = 3
+	EAPOLKeyTypeRC4      = 1
+	EAPOLKeyTypeAES      = 2
+	EAPOLVersion1        = 1
+	EAPOLVersion2        = 2
+	EAPOLTypeKey         = 3
 	EAPOLKeyInfoPairwise = 0x0008
 	EAPOLKeyInfoInstall  = 0x0040
 	EAPOLKeyInfoACK      = 0x0080
@@ -38,10 +38,10 @@ type EAPOLKeyFrame struct {
 type HandshakeMessage int
 
 const (
-	HandshakeMsg1 HandshakeMessage = 1
-	HandshakeMsg2 HandshakeMessage = 2
-	HandshakeMsg3 HandshakeMessage = 3
-	HandshakeMsg4 HandshakeMessage = 4
+	HandshakeMsg1       HandshakeMessage = 1
+	HandshakeMsg2       HandshakeMessage = 2
+	HandshakeMsg3       HandshakeMessage = 3
+	HandshakeMsg4       HandshakeMessage = 4
 	HandshakeMsgUnknown HandshakeMessage = 0
 )
 
@@ -118,11 +118,11 @@ func (f *EAPOLKeyFrame) MessageNumber() HandshakeMessage {
 }
 
 type FourWayHandshake struct {
-	BSSID    [6]byte
+	BSSID     [6]byte
 	ClientMAC [6]byte
-	Messages [4]*EAPOLKeyFrame
+	Messages  [4]*EAPOLKeyFrame
 	RawFrames [4][]byte
-	Complete bool
+	Complete  bool
 }
 
 func NewFourWayHandshake() *FourWayHandshake {

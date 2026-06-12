@@ -14,10 +14,10 @@ import (
 
 // PMKIDAttack captures and cracks PMKID hashes without client interaction.
 type PMKIDAttack struct {
-	cfg        *config.Config
-	hcxdump    *tools.HcxDumpTool
-	hcxpcap    *tools.HcxPcapTool
-	hashcat    *tools.Hashcat
+	cfg     *config.Config
+	hcxdump *tools.HcxDumpTool
+	hcxpcap *tools.HcxPcapTool
+	hashcat *tools.Hashcat
 }
 
 func NewPMKIDAttack(cfg *config.Config) *PMKIDAttack {

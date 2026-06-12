@@ -67,13 +67,13 @@ sudo ./wifibear --pillage --wordlist /usr/share/wordlists/rockyou.txt
 ## Building from Source
 
 ```bash
-git clone https://github.com/wifibear/wifibear.git
+git clone https://github.com/jimmytoenners/wifibear.git
 cd wifibear
 make build
 sudo ./wifibear
 ```
 
-**Build requirements**: Go 1.21+, libpcap-dev
+**Build requirements**: Go 1.25+, libpcap-dev
 
 ```bash
 # Debian/Ubuntu/Kali:
@@ -303,6 +303,10 @@ Flags:
 See [MANUAL.md](MANUAL.md) for full TUI documentation.
 
 ---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## Legal
 

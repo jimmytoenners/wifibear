@@ -8,15 +8,15 @@ import (
 
 // Session tracks the state of a wifibear run for resume capability.
 type Session struct {
-	ID              string    `json:"id"`
-	Interface       string    `json:"interface"`
-	MonitorIface    string    `json:"monitor_iface"`
-	StartTime       time.Time `json:"start_time"`
-	AttackedBSSIDs  []string  `json:"attacked_bssids"`
-	SkippedBSSIDs   []string  `json:"skipped_bssids"`
-	CrackedBSSIDs   []string  `json:"cracked_bssids"`
-	CurrentTarget   string    `json:"current_target,omitempty"`
-	path            string
+	ID             string    `json:"id"`
+	Interface      string    `json:"interface"`
+	MonitorIface   string    `json:"monitor_iface"`
+	StartTime      time.Time `json:"start_time"`
+	AttackedBSSIDs []string  `json:"attacked_bssids"`
+	SkippedBSSIDs  []string  `json:"skipped_bssids"`
+	CrackedBSSIDs  []string  `json:"cracked_bssids"`
+	CurrentTarget  string    `json:"current_target,omitempty"`
+	path           string
 }
 
 const sessionFile = ".wifibear-session.json"

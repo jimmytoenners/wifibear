@@ -17,17 +17,17 @@ import (
 // CaptureWriter captures packets to a pcap file while monitoring for EAPOL handshakes.
 // Replaces airodump-ng for targeted capture during WPA attacks.
 type CaptureWriter struct {
-	handle   *pcap.Handle
-	writer   *pcapgo.Writer
-	outFile  *os.File
-	capPath  string
-	bssid    string
-	channel  int
-	mu       sync.Mutex
+	handle  *pcap.Handle
+	writer  *pcapgo.Writer
+	outFile *os.File
+	capPath string
+	bssid   string
+	channel int
+	mu      sync.Mutex
 
 	// Handshake tracking
-	handshakes map[string]*wifi.FourWayHandshake
-	eapolCount int
+	handshakes  map[string]*wifi.FourWayHandshake
+	eapolCount  int
 	onHandshake func(*wifi.FourWayHandshake)
 }
 

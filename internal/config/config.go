@@ -37,11 +37,11 @@ type AttackConfig struct {
 	WPS   WPSConfig
 	WEP   WEPConfig
 
-	WPAOnly  bool
-	WPSOnly  bool
-	WEPOnly  bool
-	NoWPS    bool
-	NoPMKID  bool
+	WPAOnly bool
+	WPSOnly bool
+	WEPOnly bool
+	NoWPS   bool
+	NoPMKID bool
 }
 
 type WPAConfig struct {
@@ -72,9 +72,9 @@ type MACConfig struct {
 }
 
 type OutputConfig struct {
-	ResultsFile   string
-	HandshakeDir  string
-	Verbose       int
+	ResultsFile  string
+	HandshakeDir string
+	Verbose      int
 }
 
 func DefaultConfig() *Config {

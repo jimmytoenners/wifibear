@@ -41,9 +41,9 @@ type App struct {
 	channel      int
 
 	// Scan view state
-	targets     []*wifi.Target
-	cursor      int
-	selected    map[int]bool
+	targets  []*wifi.Target
+	cursor   int
+	selected map[int]bool
 
 	// Attack view state
 	attackTarget  *wifi.Target
